@@ -31,7 +31,7 @@ export default function HomePage({ salidas, viajes }) {
     <>
       <section className="hero">
         <div className="hero-copy reveal">
-          <p className="eyebrow">Comunidad activa desde hace anos</p>
+          <p className="eyebrow">Comunidad activa desde hace años</p>
           <h1>Conoce gente, pasa un gran momento y sumate a planes que valen la pena.</h1>
           <p>
             En Cole Together armamos salidas, eventos y viajes economicos para que disfrutes de verdad:
@@ -53,8 +53,8 @@ export default function HomePage({ salidas, viajes }) {
           </div>
           <div className="hero-cards">
             <article className="mini-card">
-              <h3>+6 anos de comunidad</h3>
-              <p>Eventos continuos y grupos activos todo el ano.</p>
+              <h3>+7 años de comunidad</h3>
+              <p>Eventos continuos y grupos activos todo el año.</p>
             </article>
             <article className="mini-card">
               <h3>Precios claros</h3>
