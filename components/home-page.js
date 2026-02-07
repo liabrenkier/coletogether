@@ -22,8 +22,10 @@ function HomePreviewCard({ evento }) {
 }
 
 export default function HomePage({ salidas, viajes }) {
-  const proximasSalidas = salidas.slice(0, 3);
-  const proximosViajes = viajes.slice(0, 3);
+  const salidasDestacadas = salidas.filter((item) => item.destacadaInicio);
+  const viajesDestacados = viajes.filter((item) => item.destacadaInicio);
+  const proximasSalidas = (salidasDestacadas.length > 0 ? salidasDestacadas : salidas).slice(0, 3);
+  const proximosViajes = (viajesDestacados.length > 0 ? viajesDestacados : viajes).slice(0, 3);
 
   return (
     <>

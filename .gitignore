@@ -1,6 +1,7 @@
 node_modules
 .next
 .vercel
+.sanity
 .env.local
 npm-debug.log*
 yarn-debug.log*

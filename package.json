@@ -5,11 +5,17 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "studio": "sanity dev --host 0.0.0.0 --port 3333",
+    "studio:deploy": "sanity deploy"
   },
   "dependencies": {
+    "@sanity/image-url": "^2.0.3",
+    "@sanity/vision": "^4.22.0",
     "next": "^15.0.0",
+    "next-sanity": "^11.6.12",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "sanity": "^4.22.0"
   }
 }
