@@ -1,0 +1,336 @@
+[
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 5
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "titulo",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "titulo",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "initialValue": false,
+        "name": "destacadaInicio",
+        "type": "boolean",
+        "title": "Destacada en inicio"
+      },
+      {
+        "initialValue": false,
+        "description": "Si esta activo, esta salida no se muestra en el sitio.",
+        "name": "oculta",
+        "type": "boolean",
+        "title": "Ocultar en el sitio"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "fechaInicio",
+        "type": "date",
+        "title": "Fecha de inicio"
+      },
+      {
+        "name": "fechaFin",
+        "type": "date",
+        "title": "Fecha de fin"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "lugar",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "precio",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "imagen",
+        "type": "image"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 20
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "descripcion",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "incluye",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "noIncluye",
+        "type": "array",
+        "title": "No incluye"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "plan",
+        "type": "array",
+        "title": "Itinerario resumido"
+      }
+    ],
+    "name": "salida",
+    "type": "document"
+  },
+  {
+    "fields": [
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 5
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "titulo",
+        "type": "string"
+      },
+      {
+        "options": {
+          "source": "titulo",
+          "maxLength": 96
+        },
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "custom"
+              },
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "slug",
+        "type": "slug"
+      },
+      {
+        "initialValue": false,
+        "name": "destacadaInicio",
+        "type": "boolean",
+        "title": "Destacada en inicio"
+      },
+      {
+        "initialValue": false,
+        "description": "Si esta activo, este viaje no se muestra en el sitio.",
+        "name": "oculta",
+        "type": "boolean",
+        "title": "Ocultar en el sitio"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "fechaInicio",
+        "type": "date",
+        "title": "Fecha de inicio"
+      },
+      {
+        "name": "fechaFin",
+        "type": "date",
+        "title": "Fecha de fin"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "lugar",
+        "type": "string"
+      },
+      {
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "precio",
+        "type": "string"
+      },
+      {
+        "options": {
+          "hotspot": true
+        },
+        "name": "imagen",
+        "type": "image"
+      },
+      {
+        "rows": 4,
+        "validation": [
+          {
+            "rules": [
+              {
+                "flag": "presence",
+                "constraint": "required"
+              },
+              {
+                "flag": "min",
+                "constraint": 20
+              }
+            ],
+            "level": "error"
+          }
+        ],
+        "name": "descripcion",
+        "type": "text"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "incluye",
+        "type": "array"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "noIncluye",
+        "type": "array",
+        "title": "No incluye"
+      },
+      {
+        "of": [
+          {
+            "type": "string"
+          }
+        ],
+        "name": "plan",
+        "type": "array",
+        "title": "Itinerario resumido"
+      }
+    ],
+    "name": "viaje",
+    "type": "document"
+  }
+]
