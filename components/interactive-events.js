@@ -131,6 +131,9 @@ export function EventCalendar({ items }) {
   const today = useMemo(() => new Date(), []);
   const [currentMonth, setCurrentMonth] = useState(() => new Date(today.getFullYear(), today.getMonth(), 1));
   const [selectedDate, setSelectedDate] = useState(() => toIsoDate(today));
+  const [filterType, setFilterType] = useState("todos");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [onlyUpcoming, setOnlyUpcoming] = useState(true);
 
   const ordered = useMemo(() => {
     return [...items].sort((a, b) => new Date(a.fechaInicio) - new Date(b.fechaInicio));
@@ -162,6 +165,38 @@ export function EventCalendar({ items }) {
 
   const calendarDays = useMemo(() => buildCalendarDays(currentMonth), [currentMonth]);
   const selectedEvents = eventsByDay[selectedDate] || [];
+  const todayNoon = useMemo(() => parseIsoDate(toIsoDate(today)), [today]);
+  const listFiltered = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+
+    return ordered.filter((evento) => {
+      if (filterType !== "todos" && evento.tipo !== filterType) return false;
+      if (query) {
+        const haystack = `${evento.titulo} ${evento.lugar}`.toLowerCase();
+        if (!haystack.includes(query)) return false;
+      }
+      if (onlyUpcoming) {
+        const end = parseIsoDate(evento.fechaFin || evento.fechaInicio);
+        if (end < todayNoon) return false;
+      }
+      return true;
+    });
+  }, [ordered, filterType, searchQuery, onlyUpcoming, todayNoon]);
+  const listGroups = useMemo(() => {
+    return listFiltered.reduce((acc, evento) => {
+      const start = parseIsoDate(evento.fechaInicio);
+      const key = `${start.getFullYear()}-${String(start.getMonth() + 1).padStart(2, "0")}`;
+      if (!acc[key]) {
+        acc[key] = {
+          label: start.toLocaleDateString("es-AR", { month: "long", year: "numeric" }),
+          items: []
+        };
+      }
+      acc[key].items.push(evento);
+      return acc;
+    }, {});
+  }, [listFiltered]);
+  const groupKeys = useMemo(() => Object.keys(listGroups).sort(), [listGroups]);
 
   useEffect(() => {
     const onKeyDown = (event) => {
@@ -248,7 +283,14 @@ export function EventCalendar({ items }) {
                   {count > 0 ? <span className="calendar-day-badge">{count}</span> : null}
                 </div>
                 {count > 0 ? (
-                  <span className="calendar-day-event-text">{count === 1 ? "Dia con evento" : "Dia con eventos"}</span>
+                  <>
+                    <span className="calendar-day-event-text calendar-day-event-text--full">
+                      {count === 1 ? "Dia con evento" : "Dia con eventos"}
+                    </span>
+                    <span className="calendar-day-event-text calendar-day-event-text--short">
+                      {count === 1 ? "Evento" : "Eventos"}
+                    </span>
+                  </>
                 ) : null}
               </button>
             );
@@ -287,6 +329,77 @@ export function EventCalendar({ items }) {
                 </li>
               ))}
             </ul>
+          )}
+        </div>
+
+        <div className="calendar-list-panel">
+          <div className="calendar-list-head">
+            <div>
+              <h3>Todos los viajes y salidas</h3>
+              <p>Ordenados por fecha</p>
+            </div>
+            <p className="calendar-list-count">{listFiltered.length} eventos</p>
+          </div>
+          <div className="calendar-list-controls">
+            <div className="calendar-filter-group" role="group" aria-label="Filtrar por tipo">
+              {[
+                { value: "todos", label: "Todos" },
+                { value: "salida", label: "Salidas" },
+                { value: "viaje", label: "Viajes" }
+              ].map((option) => (
+                <button
+                  key={option.value}
+                  type="button"
+                  className={`calendar-filter-button ${filterType === option.value ? "active" : ""}`}
+                  aria-pressed={filterType === option.value}
+                  onClick={() => setFilterType(option.value)}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+            <label className="calendar-search">
+              <span>Buscar</span>
+              <input
+                type="search"
+                placeholder="Nombre o lugar"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+              />
+            </label>
+            <label className="calendar-toggle">
+              <input
+                type="checkbox"
+                checked={onlyUpcoming}
+                onChange={(event) => setOnlyUpcoming(event.target.checked)}
+              />
+              <span>Solo proximos</span>
+            </label>
+          </div>
+          {listFiltered.length === 0 ? (
+            <p className="calendar-list-empty">No hay eventos con esos filtros.</p>
+          ) : (
+            <div className="calendar-list-groups">
+              {groupKeys.map((key) => (
+                <div key={key} className="calendar-list-group">
+                  <h4>{listGroups[key].label}</h4>
+                  <ul className="calendar-list">
+                    {listGroups[key].items.map((evento) => (
+                      <li key={`list-${evento.id}`} className="calendar-item">
+                        <button type="button" className="calendar-item-button" onClick={() => setActiveId(evento.id)}>
+                          <span className="calendar-date">{formatRange(evento.fechaInicio, evento.fechaFin)}</span>
+                          <div className="calendar-info">
+                            <span className={`type ${evento.tipo}`}>{evento.tipo}</span>
+                            <strong>{evento.titulo}</strong>
+                            <p>{evento.lugar}</p>
+                          </div>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>
