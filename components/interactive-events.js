@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { formatDate, formatRange } from "@/lib/date-format";
+import { formatDate, formatRange, formatRangeCompact } from "@/lib/date-format";
 import { resolveEventImage } from "@/lib/image-fallback";
 
 function DetailPanel({ evento, onClose }) {
@@ -323,7 +323,7 @@ export function EventCalendar({ items }) {
                     <span className={`type ${evento.tipo}`}>{evento.tipo}</span>
                     <strong>{evento.titulo}</strong>
                     <p>
-                      {formatRange(evento.fechaInicio, evento.fechaFin)} | {evento.lugar}
+                      {formatRangeCompact(evento.fechaInicio, evento.fechaFin)} | {evento.lugar}
                     </p>
                   </button>
                 </li>
@@ -387,7 +387,7 @@ export function EventCalendar({ items }) {
                     {listGroups[key].items.map((evento) => (
                       <li key={`list-${evento.id}`} className="calendar-item">
                         <button type="button" className="calendar-item-button" onClick={() => setActiveId(evento.id)}>
-                          <span className="calendar-date">{formatRange(evento.fechaInicio, evento.fechaFin)}</span>
+                  <span className="calendar-date">{formatRangeCompact(evento.fechaInicio, evento.fechaFin)}</span>
                           <div className="calendar-info">
                             <span className={`type ${evento.tipo}`}>{evento.tipo}</span>
                             <strong>{evento.titulo}</strong>
