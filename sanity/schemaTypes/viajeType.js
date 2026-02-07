@@ -25,6 +25,13 @@ export const viajeType = defineType({
       initialValue: false
     }),
     defineField({
+      name: "oculta",
+      title: "Ocultar en el sitio",
+      type: "boolean",
+      initialValue: false,
+      description: "Si esta activo, este viaje no se muestra en el sitio."
+    }),
+    defineField({
       name: "fechaInicio",
       title: "Fecha de inicio",
       type: "date",
