@@ -15,6 +15,7 @@ function HomePreviewCard({ evento }) {
           {formatRange(evento.fechaInicio, evento.fechaFin)} | {evento.lugar}
         </p>
         <p className="meta">Desde {evento.precio}</p>
+        {evento.cupos ? <p className="meta">Cupos: {evento.cupos}</p> : null}
         <p className="desc">{evento.descripcion}</p>
       </div>
     </article>

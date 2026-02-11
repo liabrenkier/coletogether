@@ -31,6 +31,11 @@ function DetailPanel({ evento, onClose }) {
           <p className="detail-meta">
             <strong>Precio:</strong> {evento.precio}
           </p>
+          {evento.cupos ? (
+            <p className="detail-meta">
+              <strong>Cupos:</strong> {evento.cupos}
+            </p>
+          ) : null}
         </div>
         <div className="detail-block">
           <h4>Descripcion</h4>
@@ -78,6 +83,7 @@ function EventCard({ evento, onOpen }) {
           {formatRange(evento.fechaInicio, evento.fechaFin)} | {evento.lugar}
         </p>
         <p className="meta">Desde {evento.precio}</p>
+        {evento.cupos ? <p className="meta">Cupos: {evento.cupos}</p> : null}
         <p className="desc">{evento.descripcion}</p>
         <button type="button" onClick={() => onOpen(evento.id)}>
           Ver mas info

@@ -55,6 +55,12 @@ export const salidaType = defineType({
       validation: (rule) => rule.required()
     }),
     defineField({
+      name: "cupos",
+      title: "Cupos",
+      type: "string",
+      description: "Opcional. Puedes usar numeros o letras (ej. 20, Limitado, Agotado)."
+    }),
+    defineField({
       name: "imagen",
       title: "Imagen",
       type: "image",
